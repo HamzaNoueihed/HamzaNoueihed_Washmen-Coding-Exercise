@@ -1,0 +1,39 @@
+# Run docker-compose build
+# Run docker-compose up
+# Visit http://localhost
+
+version: '3.9'
+
+services:
+
+  nginx:
+    container_name: nginx-angular
+    image: nginx-angular
+    build:
+      context: .
+      dockerfile: .docker/nginx.dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - node
+    networks:
+      - app-network
+
+  node:
+    container_name: node-service
+    image: node-service
+    build:
+      context: .
+      dockerfile: .docker/node.dockerfile
+    environment:
+      - NODE_ENV=production
+      - CONTAINER=true
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,22 @@
+<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon glyphicon-user"></span>
+                Find Nearby Partners
+            </h3>
+        </header>
+        <br />
+
+        <div class="filterBar">
+            <cm-filter-textbox
+                     (changed)="filterChanged($event)"></cm-filter-textbox>
+        </div>
+
+
+        <cm-customers-card
+          [customers]="filteredCustomers"
+          [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card>
+
+    </div>
+</div>
